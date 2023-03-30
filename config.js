@@ -33,12 +33,11 @@
 //         nextGroup.dataset.status = "active";
 //     });    
 // }
-
 let activeIndex = 0;
 
 const groups = document.getElementsByClassName("card-group");
 
-const handleLoveClick = () => {
+const handleRightClick = () => {
     const nextIndex = activeIndex + 1 <= groups.length - 1 ? activeIndex + 1 : 0;
 
     const currentGroup = document.querySelector(`[data-index="${activeIndex}"]`), 
@@ -51,11 +50,11 @@ const handleLoveClick = () => {
     setTimeout(() => {
         nextGroup.dataset.status = "active";
         activeIndex = nextIndex;
-    });
+    },300);
 }
 
 
-const handleHateClick = () => {
+const handleLeftClick = () => {
   const nextIndex = activeIndex - 1 >= 0 ? activeIndex - 1 : groups.length - 1;
 
   const currentGroup = document.querySelector(`[data-index="${activeIndex}"]`),
@@ -65,8 +64,23 @@ const handleHateClick = () => {
 
   nextGroup.dataset.status = "becoming-active-from-after";
 
+//   setTimeout(() => {
+//     nextGroup.dataset.status = "active";
+//     activeIndex = nextIndex;
+//   });
+// }
+
   setTimeout(() => {
     nextGroup.dataset.status = "active";
     activeIndex = nextIndex;
+  },300);
+};
+
+  document.addEventListener("keydown", (event) => {
+    if (event.code === "ArrowLeft") {
+     handleLeftClick();
+    } else if (event.code === "ArrowRight") {
+    handleRightClick();
+    }
   });
-}
+
